@@ -31,7 +31,7 @@
             </div>
         </div>
 
-        <div class="form-group" th:classappend="(${#fields.hasErrors('categoryId')}? ' has-error')">
+        <div class="form-group" th:classappend="(${#fields.hasErrors('category.id')}? ' has-error')">
             <label class="col-lg-2 control-label">categories</label>
             <div class="btn-group" data-toggle="buttons" th:each="category : ${categories}">
                 <label class="btn btn-primary active">
@@ -39,7 +39,7 @@
 
                 </label>
             </div>
-            <span class="help-block" style="text-align: center;" th:if="${#fields.hasErrors('categoryId')}"
+            <span class="help-block" style="text-align: center;" th:if="${#fields.hasErrors('category.id')}"
                   th:errors="*{category.id}">Incorrect title</span>
         </div>
         <div class="form-group">

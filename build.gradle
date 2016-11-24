@@ -36,15 +36,10 @@ dependencies {
 
 	compile'org.springframework.boot:spring-boot-starter-thymeleaf'
 	compile('io.github.jpenren:thymeleaf-spring-data-dialect:2.1.1')
-	compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4')
 	compile('org.thymeleaf.extras:thymeleaf-extras-java8time')
 
-	compile('org.springframework.boot:spring-boot-starter-cache')
-	compile('javax.cache:cache-api')
-	compile('org.ehcache:ehcache')
-
-	compile('org.springframework.boot:spring-boot-starter-security')
-	compile('org.springframework.security.oauth:spring-security-oauth2')
-
 	compile('org.springframework.boot:spring-boot-configuration-processor')
+
+	compile('org.springframework.session:spring-session')
+	compile('org.springframework.boot:spring-boot-starter-redis')
 }

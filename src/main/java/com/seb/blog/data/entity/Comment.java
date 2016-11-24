@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Data
@@ -15,6 +16,7 @@ public class Comment {
     private Long id;
 
     @NotBlank
+    @NotNull
     private String content;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)

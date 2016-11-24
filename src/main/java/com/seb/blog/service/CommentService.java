@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Transactional
@@ -21,5 +22,15 @@ public class CommentService {
 
     public void delete(Long id) {
         commentDao.delete(id);
+    }
+
+    public void deleteByPost(Long postId) {
+        List<Comment> comments = commentDao.findAll();
+
+        for(Comment comment : comments) {
+            if(comment.getPost().getId() == postId) {
+                commentDao.delete(comment);
+            }
+        }
     }
 }

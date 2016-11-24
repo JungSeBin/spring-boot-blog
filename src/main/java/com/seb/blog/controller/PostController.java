@@ -2,13 +2,12 @@ package com.seb.blog.controller;
 
 import com.seb.blog.data.entity.Comment;
 import com.seb.blog.data.entity.Post;
-import com.seb.blog.data.entity.User;
 import com.seb.blog.navigation.Navigation;
 import com.seb.blog.navigation.Section;
 import com.seb.blog.service.CategoryService;
+import com.seb.blog.service.CommentService;
 import com.seb.blog.service.PostService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +22,7 @@ import javax.validation.Valid;
 public class PostController {
     private final PostService postService;
     private final CategoryService categoryService;
+    private final CommentService commentService;
 
     @GetMapping("/{id}")
     public String findOne(@PathVariable Long id, Model model,
@@ -43,12 +43,10 @@ public class PostController {
     }
 
     @PostMapping
-    public String createPost(@ModelAttribute @Valid Post newPost, BindingResult bindingResult, Model model
-            , @AuthenticationPrincipal User user) {
+    public String createPost(@ModelAttribute @Valid Post newPost, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "post/new";
         }
-        newPost.setUser(user);
         postService.createPost(newPost);
 
         model.addAttribute("post", newPost);
@@ -66,18 +64,17 @@ public class PostController {
     }
 
     @PostMapping("/{id}/edit")
-    public String modifyPost(@PathVariable Long id, @ModelAttribute("editPost") @Valid Post newPost, BindingResult bindingResult
-            , @AuthenticationPrincipal User user) {
+    public String modifyPost(@PathVariable Long id, @ModelAttribute("editPost") @Valid Post newPost, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "post/edit";
         }
-        newPost.setUser(user);
         postService.updatePost(id, newPost);
         return "redirect:/posts/" + id;
     }
 
     @PostMapping("{id}/delete")
     public String deletePost(@PathVariable Long id) {
+        commentService.deleteByPost(id);
         postService.deletePost(id);
         return "redirect:/#/";
     }

@@ -3,11 +3,13 @@ package com.seb.blog.data.entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @Entity
@@ -16,15 +18,18 @@ import java.util.List;
 public class User implements Serializable {
     @GeneratedValue
     @Id
-    private Long id;
+    @NotBlank
+    private String id;
+
+    @NotBlank
+    private String password;
+
+    @NotBlank
+    private String name;
 
     private String email;
 
-    private String name;
-
-    private String github;
-
-    private String avatarUrl;
+    private boolean isLogined = false;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Post> posts = new ArrayList<>();
@@ -32,18 +37,11 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Comment> comments = new ArrayList<>();
 
-    @Column
-    @Lob
-    private String bio;
-
     public User() {
-
     }
 
-    public User(String email, String name, String github, String avatarUrl) {
+    public User(String email, String name) {
         this.email = email;
         this.name = name;
-        this.github = github;
-        this.avatarUrl = avatarUrl;
     }
 }

@@ -3,7 +3,6 @@ package com.seb.blog.data.entity;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -43,6 +42,14 @@ public class Post {
     // 생성자 정의
     public Post() {
 
+    }
+
+    public Post(Long id) {
+        this.id = id;
+    }
+
+    public Post(String title) {
+        this.title = title;
     }
 
     public Post(String title, String content, String code) {

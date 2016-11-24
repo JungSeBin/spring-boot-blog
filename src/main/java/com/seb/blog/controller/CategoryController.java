@@ -1,6 +1,5 @@
 package com.seb.blog.controller;
 
-import com.seb.blog.data.dao.CategoryDao;
 import com.seb.blog.data.entity.Category;
 import com.seb.blog.navigation.Navigation;
 import com.seb.blog.navigation.Section;
@@ -33,9 +32,10 @@ public class CategoryController {
     public String newCategory(@ModelAttribute Category category) {
         return "category/new";
     }
+
     @PostMapping
     public String createCategory(@ModelAttribute @Valid Category category, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             return "category/new";
         }
         categoryService.create(category);
@@ -50,7 +50,7 @@ public class CategoryController {
 
     @PostMapping("/{id}/edit")
     public String modifyCategory(@PathVariable Long id, @ModelAttribute @Valid Category category, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             return "category/edit";
         }
         categoryService.update(category);
