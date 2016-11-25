@@ -40,9 +40,9 @@ public class CommentController {
     }
 
     @ModelAttribute
-    public Post post(@ModelAttribute Comment comment){
-        if(comment == null) return null;
-        else if(comment.getPost() == null) return null;
+    public Post post(@ModelAttribute Comment comment) {
+        if (comment == null) return null;
+        else if (comment.getPost() == null) return null;
         return postService.findOne(comment.getPost().getId());
     }
 }

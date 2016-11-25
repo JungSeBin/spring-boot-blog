@@ -1,12 +1,10 @@
 package com.seb.blog.service;
 
 import com.seb.blog.data.dao.PostDao;
-import com.seb.blog.data.entity.Comment;
 import com.seb.blog.data.entity.Post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -18,11 +18,11 @@ public class UserSerivce {
 
     public boolean isUserInfoCorrect(User user) {
         User dbUser = userDao.findOne(user.getId());
-        if(dbUser == null) {
+        if (dbUser == null) {
             return false;
         }
 
-        if(dbUser.getId() == user.getId() && dbUser.getPassword() == user.getPassword()) {
+        if (dbUser.getId() == user.getId() && dbUser.getPassword() == user.getPassword()) {
             dbUser.setLogined(true);
             return true;
         }

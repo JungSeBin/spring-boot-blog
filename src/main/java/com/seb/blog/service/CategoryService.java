@@ -2,10 +2,7 @@ package com.seb.blog.service;
 
 
 import com.seb.blog.data.dao.CategoryDao;
-import com.seb.blog.data.dao.PostDao;
 import com.seb.blog.data.entity.Category;
-import com.seb.blog.data.entity.Post;
-import javafx.geometry.Pos;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,23 +30,9 @@ public class CategoryService {
         categoryDao.delete(id);
     }
 
-//    public void deletePost(Long postId) {
-//        List<Category> categories = categoryDao.findAll();
-//        List<Post> posts;
-//
-//        for(Category category : categories) {
-//            posts = category.getPosts();
-//            for(Post post : posts) {
-//                if(post.getId() == postId) {
-//                    posts.remove(post);
-//                }
-//            }
-//        }
-//    }
-
     public void update(Category category) {
         Category oldCategory = categoryDao.findOne(category.getId());
-        if(oldCategory != null) {
+        if (oldCategory != null) {
             oldCategory.setName(category.getName());
         }
     }

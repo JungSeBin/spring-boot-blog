@@ -24,7 +24,9 @@ public class Category {
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private List<Post> posts;
 
-    public Category() {}
+    public Category() {
+    }
+
     public Category(Long id, String name) {
         this.id = id;
         this.name = name;

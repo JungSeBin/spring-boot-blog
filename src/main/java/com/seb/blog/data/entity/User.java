@@ -1,20 +1,15 @@
 package com.seb.blog.data.entity;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Data
 @Entity
-@ToString(exclude = {"comments", "post"})
-@EqualsAndHashCode(exclude = {"comments", "post"})
 public class User implements Serializable {
     @GeneratedValue
     @Id

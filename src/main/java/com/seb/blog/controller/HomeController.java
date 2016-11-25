@@ -15,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
+
 import static org.springframework.data.domain.ExampleMatcher.matching;
 
 @Controller
@@ -25,6 +27,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(
+            HttpSession session,
             @RequestParam(required = false) String q, Model model,
             @PageableDefault(size = 5, sort = "regDate", direction = Sort.Direction.DESC) Pageable pageable) {
         Example<Post> post = Example.of(new Post(q),
