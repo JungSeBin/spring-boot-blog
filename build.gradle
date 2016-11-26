@@ -41,5 +41,5 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-configuration-processor')
 
 	compile('org.springframework.session:spring-session')
-	compile('org.springframework.boot:spring-boot-starter-redis')
+	compile('org.springframework.boot:spring-boot-starter-data-redis')
 }
