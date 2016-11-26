@@ -1,45 +1,44 @@
+group 'com.seb'
+version '0.0.1'
+
 buildscript {
-	ext {
-		springBootVersion = '1.4.2.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '1.4.0.RELEASE'
+    }
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
 
 jar {
-	baseName = 'seb-blog'
-	version = '0.0.1-SNAPSHOT'
+    baseName = 'spring-boot-example'
+    version = '0.0.1'
 }
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
-
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile('org.springframework.boot:spring-boot-starter-web')
-	runtime('com.h2database:h2')
-	compileOnly('org.projectlombok:lombok')
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile ('org.webjars.bower:bootstrap:3.3.7')
+    compile 'org.webjars.bower:jquery:3.1.1'
+    compile 'javax.servlet:jstl'
+    compile 'org.apache.tomcat.embed:tomcat-embed-jasper'
+    compile 'org.webjars.bower:origoni-startbootstrap-clean-blog:1.0.3'
+    compile 'org.projectlombok:lombok:1.16.10'
+    compile 'com.h2database:h2'
+    compile 'org.webjars.bower:pen:0.2.2'
+    compile 'org.webjars.bower:font-awesome:4.7.0'
+    compile 'org.springframework.social:spring-social-facebook:1.1.0.RELEASE'
+}
 
-	testCompile('org.springframework.boot:spring-boot-starter-test')
-
-	compile'org.springframework.boot:spring-boot-starter-thymeleaf'
-	compile('io.github.jpenren:thymeleaf-spring-data-dialect:2.1.1')
-	compile('org.thymeleaf.extras:thymeleaf-extras-java8time')
-
-	compile('org.springframework.boot:spring-boot-configuration-processor')
-
-	compile('org.springframework.session:spring-session')
-	compile('org.springframework.boot:spring-boot-starter-redis')
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.5'
 }
