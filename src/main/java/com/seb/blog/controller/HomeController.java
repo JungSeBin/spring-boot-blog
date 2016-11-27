@@ -4,6 +4,7 @@ import com.seb.blog.data.dao.PostDao;
 import com.seb.blog.data.entity.Post;
 import com.seb.blog.navigation.Navigation;
 import com.seb.blog.navigation.Section;
+import com.seb.blog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -23,17 +24,12 @@ import static org.springframework.data.domain.ExampleMatcher.matching;
 @RequiredArgsConstructor
 @Navigation(Section.HOME)
 public class HomeController {
-    private final PostDao postDao;
+    private final PostService postService;
 
     @GetMapping("/")
-    public String home(
-            HttpSession session,
-            @RequestParam(required = false) String q, Model model,
+    public String home(Model model,
             @PageableDefault(size = 5, sort = "regDate", direction = Sort.Direction.DESC) Pageable pageable) {
-        Example<Post> post = Example.of(new Post(q),
-                matching()
-                        .withMatcher("title", ExampleMatcher.GenericPropertyMatcher::contains));
-        model.addAttribute("posts", postDao.findAll(post, pageable));
+        model.addAttribute("posts", postService.findAll(pageable));
         return "index";
     }
 }

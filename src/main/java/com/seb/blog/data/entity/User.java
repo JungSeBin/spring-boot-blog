@@ -2,16 +2,21 @@ package com.seb.blog.data.entity;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity
+@EnableAutoConfiguration
+
 public class User implements Serializable {
-    @GeneratedValue
     @Id
     @NotBlank
     private String id;
@@ -19,18 +24,15 @@ public class User implements Serializable {
     @NotBlank
     private String password;
 
-    @NotBlank
     private String name;
 
     private String email;
 
-    private boolean isLogined = false;
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Post> posts = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Comment> comments = new ArrayList<>();
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//    private List<Post> posts = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//    private List<Comment> comments = new ArrayList<>();
 
     public User() {
     }

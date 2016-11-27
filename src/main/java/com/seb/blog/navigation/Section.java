@@ -3,7 +3,9 @@ package com.seb.blog.navigation;
 public enum Section {
     HOME("Home"),
     POST("Post"),
-    CATEGORY("Category");
+    CATEGORY("Category"),
+    LOGIN("Log in"),
+    SIGNUP("Sign up");
 
 
     private String value;

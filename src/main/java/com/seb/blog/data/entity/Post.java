@@ -1,6 +1,7 @@
 package com.seb.blog.data.entity;
 
 import lombok.Data;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -10,6 +11,8 @@ import java.util.List;
 
 @Data
 @Entity
+@EnableAutoConfiguration
+
 public class Post {
     @Id
     @GeneratedValue

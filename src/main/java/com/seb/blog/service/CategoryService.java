@@ -3,6 +3,7 @@ package com.seb.blog.service;
 
 import com.seb.blog.data.dao.CategoryDao;
 import com.seb.blog.data.entity.Category;
+import com.seb.blog.data.entity.Post;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,6 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class CategoryService {
-    private static final Logger log = LoggerFactory.getLogger(Category.class);
     private final CategoryDao categoryDao;
 
     public Category create(Category category) {

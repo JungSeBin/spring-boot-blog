@@ -2,6 +2,7 @@ package com.seb.blog.data.entity;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -10,6 +11,8 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
+@EnableAutoConfiguration
+
 public class Comment {
     @Id
     @GeneratedValue

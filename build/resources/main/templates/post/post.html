@@ -18,7 +18,7 @@
 <div class="container" layout:fragment="content">
     <ul class="pager">
         <li class="next">
-            <a th:href="@{'/posts/edit/' + ${post.id}}">edit</a>
+            <a th:if="${session.isAdmin}" th:href="@{'/posts/edit/' + ${post.id}}">edit</a>
         </li>
     </ul>
     <div class="row">
@@ -30,15 +30,15 @@
     <div class="row" style="padding-top: 100px;">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <h4 id="addComment">Leave a Comment:</h4>
-            <form  th:action="@{/comments}"
+            <form th:action="@{/comments}"
                    th:object="${comment}" method="post" th:id="comment">
                 <input type="hidden" th:value="${post.id}" id="post.id" name="post.id"/>
-                <div class="well" th:classappend="(${#fields.hasErrors('content')}? ' has-error')">
+                <div th:if="${session.isLogined}" class="well" th:classappend="(${#fields.hasErrors('content')}? ' has-error')">
                     <input type="text" class="form-control input-lg" id="content" name="content"
-                           placeholder="content"/>
+                                                         placeholder="content"/>
                     <span class="help-block" th:if="${#fields.hasErrors('content')}"
                           th:errors="*{content}"></span>
-                    <ul class="pager" style="text-align:right;" >
+                        <ul class="pager" style="text-align:right;" >
                         <li class="next">
                             <button  type="submit" class="btn btn-primary">Submit</button>
                         </li>
@@ -49,11 +49,11 @@
                 <ul class="media-list comments" th:each="comment : ${post.comments}">
                     <li class="media">
                         <div class="media-body">
-                            <h5 class="media-heading pull-left">seb</h5>
+                            <h5 class="media-heading pull-left" th:text="${comment.user.name}"></h5>
                             <div class="comment-info pull-left">
                                 <div class="btn-default btn-xs" th:text="${comment.regDate}"><i class="fa fa-clock-o"></i> Posted 3 weeks ago</div>
                             </div>
-                            <span style="top: 18px;" th:onclick="'deleteComment(\'' + ${comment.post.id} + '\', \'' + ${comment.id} + '\');'" class="glyphicon glyphicon-remove" ></span>
+                            <span th:if="${session.isAdmin}" style="top: 18px;" th:onclick="'deleteComment(\'' + ${comment.post.id} + '\', \'' + ${comment.id} + '\');'" class="glyphicon glyphicon-remove" ></span>
                             <p class="well" th:text="${comment.content}">This is really awesome snippet!</p>
                         </div>
                     </li>

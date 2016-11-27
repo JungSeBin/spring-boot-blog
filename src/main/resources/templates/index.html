@@ -11,7 +11,7 @@
     <div class="row">
         <ul class="pager">
             <li class="next">
-                <a th:href="@{/posts/new}">write</a>
+                <a th:if="${session.isAdmin}" th:href="@{/posts/new}">write</a>
             </li>
         </ul>
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -21,7 +21,7 @@
                     </h2>
                 </a>
                 <div>
-                    <p style="margin: 10px 0px;">Posted by <strong th:if="${post.user}" th:text="${post.user.name}"></strong> on <strong th:text="${post.regDate}"> </strong> category <strong th:text="${post.category.name}"></strong></p>
+                    <p style="margin: 10px 0px;">Posted by <strong th:if="${post.user}" th:text="${post.user.name}"></strong> on <strong th:text="${post.regDate}"> </strong> category <strong th:if="${post.category}" th:text="${post.category.name}"></strong></p>
                 </div>
             </div>
         </div>

@@ -63,15 +63,17 @@
                     <a href="/">home</a>
                 </li>
                 <li>
-                    <a href="/posts/new">write</a>
+                    <a th:if="${session.isAdmin}" href="/posts/new">write</a>
                 </li>
                 <li>
-                    <a href="/categories">category</a>
+                    <a th:if="${session.isAdmin}" href="/categories">category</a>
                 </li>
                 <li>
-                    <a href="/login">log in</a>
-                    <!--<a th:if="${user.isLogined}" href="/login">log in</a>-->
-                    <!--<a th:unless="${user.isLogiend}" href="/logout">log out</a>-->
+                    <a th:if="!${session.isLogined}" href="/users/login">log in</a>
+                    <a th:if="${session.isLogined}" href="/users/logout">log out</a>
+                </li>
+                <li>
+                    <a th:if="!${session.isLogined}" href="/users/new">Sign Up</a>
                 </li>
             </ul>
         </div>

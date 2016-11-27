@@ -2,7 +2,11 @@ package com.seb.blog.service;
 
 import com.seb.blog.data.dao.PostDao;
 import com.seb.blog.data.entity.Post;
+import com.seb.blog.data.entity.User;
+import javafx.geometry.Pos;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,8 +19,9 @@ import java.util.List;
 public class PostService {
     private final PostDao postDao;
 
-    public Post createPost(Post post) {
+    public Post createPost(User user, Post post) {
         post.setRegDate(LocalDateTime.now());
+        post.setUser(user);
         return postDao.save(post);
     }
 
@@ -37,11 +42,7 @@ public class PostService {
         }
     }
 
-    public Post findOne(Long id) {
-        return postDao.findOne(id);
-    }
-
-    public void deleteCategory(Long categoryId) {
+    public void deletePostsCategory(Long categoryId) {
         List<Post> postList = postDao.findAll();
 
         for (Post post : postList) {
@@ -49,5 +50,13 @@ public class PostService {
                 post.setCategory(null);
             }
         }
+    }
+
+    public Page<Post> findAll(Pageable pageable) {
+        return postDao.findAll(pageable);
+    }
+
+    public Post findOne(Long id) {
+        return postDao.findOne(id);
     }
 }

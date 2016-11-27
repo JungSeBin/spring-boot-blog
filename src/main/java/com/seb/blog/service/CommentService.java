@@ -2,6 +2,7 @@ package com.seb.blog.service;
 
 import com.seb.blog.data.dao.CommentDao;
 import com.seb.blog.data.entity.Comment;
+import com.seb.blog.data.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,8 +16,9 @@ import java.util.List;
 public class CommentService {
     private final CommentDao commentDao;
 
-    public Comment create(Comment comment) {
+    public Comment create(User user, Comment comment) {
         comment.setRegDate(LocalDateTime.now());
+        comment.setUser(user);
         return commentDao.save(comment);
     }
 

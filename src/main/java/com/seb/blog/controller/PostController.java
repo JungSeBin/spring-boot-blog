@@ -4,15 +4,14 @@ import com.seb.blog.data.entity.Comment;
 import com.seb.blog.data.entity.Post;
 import com.seb.blog.navigation.Navigation;
 import com.seb.blog.navigation.Section;
-import com.seb.blog.service.CategoryService;
-import com.seb.blog.service.CommentService;
-import com.seb.blog.service.PostService;
+import com.seb.blog.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -23,6 +22,8 @@ public class PostController {
     private final PostService postService;
     private final CategoryService categoryService;
     private final CommentService commentService;
+    private final SessionService sessionService;
+    private final UserSerivce userSerivce;
 
     @GetMapping("/{id}")
     public String findOne(@PathVariable Long id, Model model,
@@ -37,24 +38,31 @@ public class PostController {
     }
 
     @GetMapping("/new")
-    public String newPost(Post post, Model model) {
+    public String newPost(HttpSession session, Post post, Model model) {
+        if(!sessionService.isAdmin(session.getId())) {
+            return "redirect:/";
+        }
         model.addAttribute("categories", categoryService.findAll());
         return "post/new";
     }
 
     @PostMapping
-    public String createPost(@ModelAttribute @Valid Post newPost, BindingResult bindingResult, Model model) {
+    public String createPost(HttpSession session, @ModelAttribute @Valid Post newPost, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "post/new";
         }
-        postService.createPost(newPost);
+        String userId = sessionService.getUserId(session.getId());
+        postService.createPost(userSerivce.findOne(userId), newPost);
 
         model.addAttribute("post", newPost);
         return "redirect:/posts/" + newPost.getId();
     }
 
     @GetMapping("/edit/{id}")
-    public String editPost(@PathVariable Long id, Model model) {
+    public String editPost(HttpSession session, @PathVariable Long id, Model model) {
+        if(!sessionService.isAdmin(session.getId())) {
+            return "redirect:/";
+        }
         Post post = postService.findOne(id);
 
         if (post != null) {
