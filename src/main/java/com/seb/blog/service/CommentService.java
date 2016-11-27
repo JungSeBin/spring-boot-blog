@@ -29,8 +29,8 @@ public class CommentService {
     public void deleteByPost(Long postId) {
         List<Comment> comments = commentDao.findAll();
 
-        for(Comment comment : comments) {
-            if(comment.getPost().getId() == postId) {
+        for (Comment comment : comments) {
+            if (comment.getPost().getId() == postId) {
                 commentDao.delete(comment);
             }
         }

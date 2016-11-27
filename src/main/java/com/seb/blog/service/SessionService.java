@@ -26,7 +26,7 @@ public class SessionService {
     }
 
     public boolean isLogined(String sessionId) {
-        if(userSessionMap.get(sessionId) == null ||
+        if (userSessionMap.get(sessionId) == null ||
                 userSessionMap.get(sessionId).equals("")) {
             return false;
         }
@@ -34,7 +34,7 @@ public class SessionService {
     }
 
     public boolean isAdmin(String sessionId) {
-        if(userSessionMap.get(sessionId) != null &&
+        if (userSessionMap.get(sessionId) != null &&
                 userSessionMap.get(sessionId).equals("admin")) {
             return true;
         }

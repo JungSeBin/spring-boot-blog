@@ -3,10 +3,7 @@ package com.seb.blog.service;
 
 import com.seb.blog.data.dao.CategoryDao;
 import com.seb.blog.data.entity.Category;
-import com.seb.blog.data.entity.Post;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

@@ -19,7 +19,7 @@ public class SessionListener implements HttpSessionListener {
     }
 
     public void sessionDestroyed(HttpSessionEvent event) {
-        logger.info("destroy: {}" ,event.getSession().getId());
+        logger.info("destroy: {}", event.getSession().getId());
         sessionService.removeSession(event.getSession().getId());
     }
 }

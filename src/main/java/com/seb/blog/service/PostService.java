@@ -3,7 +3,6 @@ package com.seb.blog.service;
 import com.seb.blog.data.dao.PostDao;
 import com.seb.blog.data.entity.Post;
 import com.seb.blog.data.entity.User;
-import javafx.geometry.Pos;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

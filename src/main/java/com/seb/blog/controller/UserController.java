@@ -1,8 +1,6 @@
 package com.seb.blog.controller;
 
 import com.seb.blog.data.entity.User;
-import com.seb.blog.navigation.Navigation;
-import com.seb.blog.navigation.Section;
 import com.seb.blog.service.SessionService;
 import com.seb.blog.service.UserSerivce;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +28,7 @@ public class UserController {
 
     @GetMapping("/new")
     public String newUser(HttpSession session, @ModelAttribute User user) {
-        if(sessionService.isLogined(session.getId())) {
+        if (sessionService.isLogined(session.getId())) {
             return "redirect:/";
         }
         return "user/new";
@@ -43,7 +41,7 @@ public class UserController {
         }
         logger.info("User: {}", user);
         User createdUser = userService.create(user);
-        if(createdUser == null) {
+        if (createdUser == null) {
             return "user/new";
         }
         return "redirect:/";
@@ -67,10 +65,9 @@ public class UserController {
             request.getSession().setAttribute("isLogined", true);
             request.getSession().setAttribute("userName", userService.findOne(user.getId()));
 
-            if(sessionService.isAdmin(request.getSession().getId())) {
+            if (sessionService.isAdmin(request.getSession().getId())) {
                 request.getSession().setAttribute("isAdmin", true);
-            }
-            else {
+            } else {
                 request.getSession().setAttribute("isAdmin", false);
             }
             return "redirect:/";

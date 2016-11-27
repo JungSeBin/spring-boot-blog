@@ -5,12 +5,8 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @Entity

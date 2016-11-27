@@ -1,8 +1,6 @@
 package com.seb.blog.service;
 
 import com.seb.blog.data.dao.UserDao;
-import com.seb.blog.data.entity.Comment;
-import com.seb.blog.data.entity.Post;
 import com.seb.blog.data.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -19,14 +17,14 @@ public class UserSerivce {
 
     public User findOne(String userId) {
         User user = userDao.findOne(userId);
-        if(user == null) {
+        if (user == null) {
             return null;
         }
         return user;
     }
 
     public User create(User user) {
-        if(userDao.findOne(user.getId()) != null) {
+        if (userDao.findOne(user.getId()) != null) {
             return null;
         }
         userDao.save(user);

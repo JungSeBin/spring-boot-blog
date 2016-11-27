@@ -39,7 +39,7 @@ public class PostController {
 
     @GetMapping("/new")
     public String newPost(HttpSession session, Post post, Model model) {
-        if(!sessionService.isAdmin(session.getId())) {
+        if (!sessionService.isAdmin(session.getId())) {
             return "redirect:/";
         }
         model.addAttribute("categories", categoryService.findAll());
@@ -60,7 +60,7 @@ public class PostController {
 
     @GetMapping("/edit/{id}")
     public String editPost(HttpSession session, @PathVariable Long id, Model model) {
-        if(!sessionService.isAdmin(session.getId())) {
+        if (!sessionService.isAdmin(session.getId())) {
             return "redirect:/";
         }
         Post post = postService.findOne(id);
